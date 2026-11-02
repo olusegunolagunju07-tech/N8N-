@@ -1,0 +1,230 @@
+{
+  "name": "Form submission",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Entrance form",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "First Name ",
+              "placeholder": "John"
+            },
+            {
+              "fieldLabel": "Last Name ",
+              "placeholder": "Smith"
+            },
+            {
+              "fieldLabel": "Email",
+              "fieldType": "email"
+            },
+            {
+              "fieldLabel": "Phone number",
+              "fieldType": "number"
+            },
+            {
+              "fieldLabel": "Date ",
+              "fieldType": "date"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.6,
+      "position": [
+        -16,
+        0
+      ],
+      "id": "cbccd8e1-6124-496f-8ff1-cce5a71c10e2",
+      "name": "Entrance form ",
+      "webhookId": "fe74c054-d004-4392-8e65-15f581c250f0"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1A_px5og9jyhvkjNUEpelA8VvySGPcxYSgb2jc1-fSAE",
+          "mode": "list",
+          "cachedResultName": "Entrance Form ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1A_px5og9jyhvkjNUEpelA8VvySGPcxYSgb2jc1-fSAE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1A_px5og9jyhvkjNUEpelA8VvySGPcxYSgb2jc1-fSAE/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "First Name ": "={{ $json['First Name '] }}",
+            "Last Name ": "={{ $json['Last Name '] }}",
+            "Email": "={{ $json.Email }}",
+            "Submitted at": "={{ $json.submittedAt }}",
+            "Phone Number": "={{ $json['Phone number'] }}",
+            "Date of Birth": "={{ $json['Date '] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Submission ID",
+              "displayName": "Submission ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Respondent ID",
+              "displayName": "Respondent ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Submitted at",
+              "displayName": "Submitted at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "First Name ",
+              "displayName": "First Name ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Last Name ",
+              "displayName": "Last Name ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Phone Number",
+              "displayName": "Phone Number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Date of Birth",
+              "displayName": "Date of Birth",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        208,
+        0
+      ],
+      "id": "46944922-70b8-4573-af23-dab54d170669",
+      "name": "Log to Google Sheets ",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "If7I68gfFD4dJzpO",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.Email }}",
+        "subject": "Thanks for choosing us!",
+        "emailType": "text",
+        "message": "=I would like to first and foremost show my appreciation for your interest in being a part of our prestigious school. \nKing's College would be honoured to be part of {{ $json['First Name '] }}'s academic journey and we assure you that it will be a very successful one here at King's College\nFeel free to contact us if you have any enquiries at:\nolusegunolagunju07@gmail.com\n08046372847\n\nWELCOME TO THE SCHOOL WHERE EVERYONE IS ROYALTY!!!!",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        432,
+        0
+      ],
+      "id": "34f5d6b7-99e7-4dc5-b774-3fea6444ec15",
+      "name": "Send a confirmation email",
+      "webhookId": "beff94f8-9ecd-4223-9ed5-4322d846d5fe",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "SlH0XkXg5NtMQh3E",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Entrance form ": {
+      "main": [
+        [
+          {
+            "node": "Log to Google Sheets ",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log to Google Sheets ": {
+      "main": [
+        [
+          {
+            "node": "Send a confirmation email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "f18896d2-967b-465a-ac39-417da4ec9eef",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "fae0fa7c6219866f04be9901ce4a745264257b6f4071e0183263d69cf3b9e4cc"
+  },
+  "nodeGroups": [],
+  "id": "bO05yoHDHI2v0K8L",
+  "tags": []
+}
